@@ -72,4 +72,4 @@ Alerts can be extended to external services such as Telegram, Slack, or email fo
 
 ## 👨‍💻 Author
 Marco Albert
-Project Type: Final Year Security Project / Internship Lab Work
+Project Type : Final Year Security Project / Internship Lab Work
