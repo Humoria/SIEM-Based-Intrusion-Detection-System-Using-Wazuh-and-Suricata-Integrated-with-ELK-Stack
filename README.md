@@ -4,23 +4,41 @@ This project demonstrates the implementation of a Security Information and Event
 
 ## 📌 Overview
 
-- **Wazuh**: Provides host-based intrusion detection, log analysis, integrity monitoring, and active response.
+- **Wazuh**: Provides host-based intrusion detection, log analysis, file integrity monitoring, and active response.
 - **Suricata**: An open-source network threat detection engine for real-time intrusion detection (IDS), intrusion prevention (IPS), and network security monitoring (NSM).
-- **ELK Stack** (Elasticsearch, Logstash, Kibana): Serves as a powerful platform for indexing, analyzing, and visualizing logs from both Wazuh and Suricata.
+- **ELK Stack** (Elasticsearch, Logstash, Kibana): Acts as a centralized platform to collect, index, analyze, and visualize logs from both Wazuh and Suricata.
 
 ## 🧰 Components Used
 
-| Component    | Description                                 |
-|--------------|---------------------------------------------|
-| Wazuh        | Host-based security monitoring              |
-| Suricata     | Network-based IDS/IPS                       |
-| Filebeat     | Log forwarder from Wazuh & Suricata         |
-| Logstash     | Parses and processes incoming logs          |
-| Elasticsearch| Stores and indexes log data                 |
-| Kibana       | Data visualization and dashboarding         |
-| Ubuntu 20.04 | Operating System for deployment             |
+| Component     | Description                                 |
+|---------------|---------------------------------------------|
+| Wazuh         | Host-based security monitoring              |
+| Suricata      | Network-based IDS/IPS                       |
+| Filebeat      | Log shipper to ELK Stack                    |
+| Logstash      | Log processor for filtering and parsing     |
+| Elasticsearch | Stores and indexes log data                 |
+| Kibana        | Visualization and dashboard tool            |
+| Ubuntu 20.04  | Operating system used for deployment        |
 
 ## ⚙️ System Architecture
 
-The system architecture integrates Wazuh and Suricata on a single Ubuntu server. Both agents forward their logs to the ELK Stack for unified analysis and real-time alerting.
+The architecture integrates Wazuh and Suricata on a single Ubuntu server. Both tools send security logs to the ELK Stack for correlation, alerting, and visualization.
 
+> *(Insert a system topology diagram here, e.g., `system-topology.png` if available)*
+
+## 🚨 Use Cases
+
+- Detect brute-force login attempts
+- Identify and analyze suspicious network traffic
+- Monitor file system changes on endpoints
+- Centralized real-time alerting and visualization
+
+## 🛠️ Installation & Setup
+
+> ⚠️ This setup assumes a clean installation of Ubuntu 20.04.
+
+### 1. Clone this repository
+
+```bash
+git clone https://github.com/your-username/wazuh-suricata-siem.git
+cd wazuh-suricata-siem
