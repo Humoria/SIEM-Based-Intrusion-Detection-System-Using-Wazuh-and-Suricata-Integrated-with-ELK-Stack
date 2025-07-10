@@ -42,3 +42,39 @@ The architecture integrates Wazuh and Suricata on a single Ubuntu server. Both t
 ```bash
 git clone https://github.com/your-username/wazuh-suricata-siem.git
 cd wazuh-suricata-siem
+
+Run setup scripts (if available)
+bash
+Copy
+Edit
+bash setup_wazuh.sh
+bash setup_suricata.sh
+
+3. Verify ELK Stack Integration
+Ensure that:
+
+Filebeat is forwarding logs from Wazuh and Suricata
+
+Logstash is correctly parsing logs
+
+Kibana dashboards are active and displaying alerts
+
+📊 Dashboards & Alerts
+Kibana includes dashboards for monitoring:
+
+Wazuh alerts: failed SSH logins, file changes, policy violations
+
+Suricata alerts: port scans, DNS tunneling, DoS signatures
+
+Alerts can be extended to external services such as Telegram, Slack, or email for real-time notification.
+
+🔒 Security Notes
+Before making this repository public:
+
+Sanitize all sensitive data (e.g., IP addresses, passwords, tokens)
+
+Avoid including full raw logs unless they are anonymized
+
+👨‍💻 Author
+Marco Albert
+Project Type: Final Year Security Project / Internship Lab Work
