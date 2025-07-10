@@ -1,0 +1,83 @@
+CONFIG DECODERS
+JALANKAN PADA SERVER WAZUH (BUKAN TARGET)
+=========================================================================
+nano /var/ossec/etc/decoders/local_decoder.xml
+Tambahkan ini:
+=========================================================================
+<decoder name="json">
+  <prematch>^{\s*"</prematch>
+</decoder>
+
+<decoder name="json_child">
+  <parent>json</parent>
+  <regex type="pcre2">"src_ip":"([^"]+)"</regex>
+  <order>srcip</order>
+</decoder>
+
+<decoder name="json_child">
+  <parent>json</parent>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
+=========================================================================
+
+nano /var/ossec/etc/local_internal_options.conf
+Tambahkan ini:
+=========================================================================
+analysisd.decoder_order_size=1024
+=========================================================================
+
+sudo systemctl restart wazuh-manager
+
+
+
+INSTALL SURICATA 
+=====================================================
+
+sudo add-apt-repository ppa:oisf/suricata-stable --yes
+sudo apt update
+sudo apt install suricata jq
+sudo suricata --build-info
+
+cd /opt
+
+curl -LO https://rules.emergingthreats.net/open/suricata-7.0.1/emerging.rules.tar.gz
+
+mkdir /etc/suricata/rules/
+
+sudo tar -xvzf emerging.rules.tar.gz && sudo mv rules/*.rules /etc/suricata/rules/
+
+sudo chmod 640 /etc/suricata/rules/*.rules
+
+
+(Cek interface)
+ip addr
+
+nano /etc/suricata/suricata.yaml
+Ubah ini:
+=========================================================================
+	HOME_NET: "<IP TARGET SERVER>"
+	EXTERNAL_NET: "any"
+
+	# Linux high speed capture support
+	af-packet:
+	  - interface: <INTERFACE>
+
+  default-rule-path: /etc/suricata/rules
+  rule-files:
+  - "*.rules"
+=========================================================================
+
+sudo suricata -T -c /etc/suricata/suricata.yaml -v
+sudo systemctl restart suricata
+
+
+nano /var/ossec/etc/ossec.conf
+Ubah ini (Scroll ke paling bawah, paste sebelum </ossec_config>:
+=========================================================================
+  <localfile>
+    <log_format>json</log_format>
+    <location>/var/log/suricata/eve.json</location>
+  </localfile>
+=========================================================================
+
+sudo systemctl restart wazuh-agent
