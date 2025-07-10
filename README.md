@@ -44,7 +44,7 @@ git clone https://github.com/your-username/wazuh-suricata-siem.git
 cd wazuh-suricata-siem
 ```
 
-2. Run setup scripts (if available)
+### 2. Run setup scripts (if available)
 ```bash
 Copy
 Edit
@@ -52,7 +52,7 @@ bash setup_wazuh.sh
 bash setup_suricata.sh
 ```
 
-3. Verify ELK Stack Integration
+### 3. Verify ELK Stack Integration
 Ensure that:
 
 Filebeat is forwarding logs from Wazuh and Suricata
@@ -61,7 +61,7 @@ Logstash is correctly parsing logs
 
 Kibana dashboards are active and displaying alerts
 
-📊 Dashboards & Alerts
+## 📊 Dashboards & Alerts
 Kibana includes dashboards for monitoring:
 
 Wazuh alerts: failed SSH logins, file changes, policy violations
@@ -70,6 +70,6 @@ Suricata alerts: port scans, DNS tunneling, DoS signatures
 
 Alerts can be extended to external services such as Telegram, Slack, or email for real-time notification.
 
-👨‍💻 Author
+## 👨‍💻 Author
 Marco Albert
 Project Type: Final Year Security Project / Internship Lab Work
